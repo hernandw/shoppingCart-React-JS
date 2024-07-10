@@ -7,6 +7,7 @@ import { db } from "./data/db.js";
 const App = () => {
   const [guitars, setGuitars] = useState(db);
   const [cart, setCart] = useState([]);
+  const [activo, setActivo] = useState(false);
 
   const addToCart = (item) => {
     setCart([...cart, item]);
@@ -20,11 +21,40 @@ const App = () => {
       item.quantity = 1;
       setCart([...cart, item]);
     }
+
+    setActivo(true);
+  };
+
+  const removeItem = (id) => {
+    const updateCart = cart.filter((item) => item.id !== id);
+    setCart(updateCart);
+  };
+
+  const increaseQueantity = (id) => {
+    const updateCart = cart.map((item) => {
+      if (item.id === id) {
+        item.quantity++;
+      }
+      return item;
+    });
+    setCart(updateCart);
+  };
+
+  const decreaseQuantity = (id) => {
+    const updateCart = cart
+      .map((item) => {
+        if (item.id === id) {
+          item.quantity--;
+        }
+        return item;
+      })
+      .filter((item) => item.quantity > 0);
+    setCart(updateCart);
   };
 
   return (
     <>
-      <Header cart={cart} />
+      <Header cart={cart} activo={activo} removeItem={removeItem} increaseQueantity={increaseQueantity} decreaseQuantity={decreaseQuantity} />
 
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
