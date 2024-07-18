@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Guitar from "./components/Guitar";
 import Header from "./components/Header";
@@ -7,9 +7,17 @@ import { db } from "./data/db.js";
 const max_stock = 5;
 
 const App = () => {
+  const initialCart = () => {
+    const cart = localStorage.getItem("cart");
+    return cart ? JSON.parse(cart) : [];
+  };
+
+
   const [guitars, setGuitars] = useState(db);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(initialCart);
   const [activo, setActivo] = useState(false);
+
+ 
 
   const addToCart = (item) => {
     setCart([...cart, item]);
@@ -55,6 +63,14 @@ const App = () => {
     setCart(updateCart);
   };
 
+  const cleanCart = () => {
+    setCart([]);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   return (
     <>
       <Header
@@ -63,6 +79,7 @@ const App = () => {
         removeItem={removeItem}
         increaseQuantity={increaseQuantity}
         decreaseQuantity={decreaseQuantity}
+        cleanCart={cleanCart}
       />
 
       <main className="container-xl mt-5">

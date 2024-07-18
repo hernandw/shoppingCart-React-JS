@@ -6,6 +6,7 @@ const Header = ({
   removeItem,
   increaseQuantity,
   decreaseQuantity,
+  cleanCart,
 }) => {
   const total = cart.reduce(
     (acc, guitar) => acc + guitar.quantity * guitar.price,
@@ -54,7 +55,7 @@ const Header = ({
               </div>
 
               <div id="carrito" className="bg-white p-3">
-                {activo ? (
+                {activo && cart.length > 0 ? (
                   <>
                     <table className="w-100 table">
                       <thead>
@@ -112,7 +113,7 @@ const Header = ({
                     <p className="text-end">
                       Total pagar: <span className="fw-bold">$${total}</span>
                     </p>
-                    <button className="btn btn-dark w-100 mt-3 p-2">
+                    <button className="btn btn-dark w-100 mt-3 p-2" onClick={cleanCart}>
                       Vaciar Carrito
                     </button>
                   </>
