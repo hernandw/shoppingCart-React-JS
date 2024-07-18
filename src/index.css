@@ -53,6 +53,26 @@
 .m-0 {
   margin: 0;
 }
+
+.count-products{
+  position: absolute;
+  top: 55%;
+  left: 30px;
+
+  background-color: var(--bs-orange);
+  color: #fff;
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+#contador-productos{
+  font-size: 12px;
+}
 /*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
@@ -777,3 +797,9 @@ button:not(:disabled),
     z-index: 10;
   }
 }
+
+/* @media (min-width: 425px) {
+.carmino {
+  justify-content: center;
+}
+} */

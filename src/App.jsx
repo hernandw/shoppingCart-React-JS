@@ -4,6 +4,8 @@ import Guitar from "./components/Guitar";
 import Header from "./components/Header";
 import { db } from "./data/db.js";
 
+const max_stock = 5;
+
 const App = () => {
   const [guitars, setGuitars] = useState(db);
   const [cart, setCart] = useState([]);
@@ -11,11 +13,12 @@ const App = () => {
 
   const addToCart = (item) => {
     setCart([...cart, item]);
-    const exitProduct = cart.findIndex((product) => product.id === item.id);
-
-    if (exitProduct >= 0) {
+    const existsProduct = cart.findIndex((product) => product.id === item.id);
+    
+    if (existsProduct >= 0) {
       const updateCart = [...cart];
-      updateCart[exitProduct].quantity++;
+      if (updateCart[existsProduct].quantity >= max_stock) return;
+      updateCart[existsProduct].quantity++;
       setCart(updateCart);
     } else {
       item.quantity = 1;
@@ -30,9 +33,9 @@ const App = () => {
     setCart(updateCart);
   };
 
-  const increaseQueantity = (id) => {
+  const increaseQuantity = (id) => {
     const updateCart = cart.map((item) => {
-      if (item.id === id) {
+      if (item.id === id && item.quantity < max_stock) {
         item.quantity++;
       }
       return item;
@@ -54,7 +57,13 @@ const App = () => {
 
   return (
     <>
-      <Header cart={cart} activo={activo} removeItem={removeItem} increaseQueantity={increaseQueantity} decreaseQuantity={decreaseQuantity} />
+      <Header
+        cart={cart}
+        activo={activo}
+        removeItem={removeItem}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+      />
 
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
