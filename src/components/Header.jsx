@@ -7,6 +7,7 @@ const Header = ({
   increaseQuantity,
   decreaseQuantity,
   cleanCart,
+  isEmpty
 }) => {
   const total = cart.reduce(
     (acc, guitar) => acc + guitar.quantity * guitar.price,
@@ -55,7 +56,7 @@ const Header = ({
               </div>
 
               <div id="carrito" className="bg-white p-3">
-                {activo && cart.length > 0 ? (
+                {!isEmpty ? (
                   <>
                     <table className="w-100 table">
                       <thead>

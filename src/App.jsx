@@ -17,7 +17,11 @@ const App = () => {
   const [cart, setCart] = useState(initialCart);
   const [activo, setActivo] = useState(false);
 
- 
+ const isEmpty = cart.length === 0;
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (item) => {
     setCart([...cart, item]);
@@ -80,6 +84,7 @@ const App = () => {
         increaseQuantity={increaseQuantity}
         decreaseQuantity={decreaseQuantity}
         cleanCart={cleanCart}
+        isEmpty={isEmpty}
       />
 
       <main className="container-xl mt-5">
