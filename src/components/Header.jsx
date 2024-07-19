@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 
 const Header = ({
   cart,
-  activo,
   removeItem,
   increaseQuantity,
   decreaseQuantity,
@@ -143,7 +142,12 @@ Header.propTypes = {
   removeItem: PropTypes.func,
   setTotal: PropTypes.func,
   setTotalItems: PropTypes.func,
-  setActivo: PropTypes.func
+  setActivo: PropTypes.func,
+
+  cleanCart: PropTypes.func,  
+
+  isEmpty: PropTypes.bool,
+
 
 };
 
