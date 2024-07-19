@@ -6,13 +6,11 @@ const Header = ({
   increaseQuantity,
   decreaseQuantity,
   cleanCart,
-  isEmpty
+  isEmpty,
+  totalItems,
+  total
 }) => {
-  const total = cart.reduce(
-    (acc, guitar) => acc + guitar.quantity * guitar.price,
-    0
-  );
-  const totalItems = cart.reduce((acc, guitar) => acc + guitar.quantity, 0);
+  
   return (
     <header className="py-5 header">
       <div className="container-xl">

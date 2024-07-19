@@ -1,4 +1,6 @@
-const Guitar = ({ guitar, setCart, addToCart }) => {
+import PropTypes from 'prop-types'; 
+
+const Guitar = ({ guitar, addToCart }) => {
   const { name, description, image, price } = guitar;
 
   return (
@@ -25,5 +27,11 @@ const Guitar = ({ guitar, setCart, addToCart }) => {
     </div>
   );
 };
+
+Guitar.propTypes = {
+  guitar: PropTypes.object,
+  setCart: PropTypes.func,
+  addToCart: PropTypes.func
+}
 
 export default Guitar;
